@@ -12,7 +12,7 @@
   const UNASSIGNED_COLOR = '#FF3D8B';
   const DAY_COLORS = ['#2EE6F6', '#B8F33A', '#FFB224', '#9C7CFF', '#FF6B3D', '#4DA3FF', '#3CF2A6', '#F5E663'];
   const BEST_TIMES = ['Morning', 'Afternoon', 'Evening', 'Any'];
-  const PRIORITIES = ['Must', 'Nice', 'Maybe'];
+  const PRIORITIES = ['Must', 'Nice', 'Maybe', 'Backup'];
   const NEAREST_LINES = 3;
 
   const $ = (sel, el = document) => el.querySelector(sel);
