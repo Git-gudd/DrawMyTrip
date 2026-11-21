@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DrawMyTrip</title>
+  <meta name="theme-color" content="#070A12">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="app">
+    <main class="stage">
+      <div id="map" role="application" aria-label="Map of trip locations"></div>
+
+      <header class="hud-title">
+        <p class="brand">DrawMyTrip</p>
+        <h1 id="tripName">Loading…</h1>
+        <p id="tripDates" class="dates"></p>
+      </header>
+
+      <section class="hud-stats" id="stats" aria-live="polite"></section>
+
+      <nav class="daybar" id="daybar" aria-label="Choose a day"></nav>
+
+      <div class="load-error" id="loadError" role="alert" hidden></div>
+    </main>
+
+    <aside class="sidebar" id="sidebar" aria-label="Locations">
+      <div class="side-head" id="sideHead"></div>
+      <div class="side-body" id="sideBody"></div>
+    </aside>
+  </div>
+
+  <dialog id="exportDialog" class="export" aria-labelledby="exportTitle">
+    <form method="dialog" class="export-inner">
+      <div class="export-head">
+        <h2 id="exportTitle">Export locations</h2>
+        <button class="icon-btn" value="close" aria-label="Close">✕</button>
+      </div>
+      <p class="export-hint">Replace the contents of <code>data/locations.json</code> with this text, then commit and push. The map updates from the file.</p>
+      <textarea id="exportText" readonly spellcheck="false" aria-label="Exported JSON"></textarea>
+      <div class="export-actions">
+        <button type="button" class="btn btn-primary" id="copyBtn">Copy text</button>
+        <button type="button" class="btn" id="downloadBtn">Download file</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/vendor/leaflet/leaflet.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
