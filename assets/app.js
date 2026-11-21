@@ -128,10 +128,16 @@
   /* ---------- Map ---------- */
   const map = L.map('map', { zoomControl: false, preferCanvas: false }).setView([13.75, 100.52], 12);
   L.control.zoom({ position: 'bottomright' }).addTo(map);
-  L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`, {
+  // Standard 256px tiles only (no "@2x" high-DPI tiles, which are ~4x the download),
+  // fetched only for the area on screen once panning/zooming stops.
+  // Added to the map after the first fit, so the default view's tiles aren't fetched for nothing.
+  const tiles = L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png?key=${CARTO_KEY}`, {
     maxZoom: 20,
+    updateWhenZooming: false,
+    updateWhenIdle: true,
+    keepBuffer: 1,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  }).addTo(map);
+  });
   const routeLayer = L.layerGroup().addTo(map);
   const linkLayer = L.layerGroup().addTo(map);
   const pinLayer = L.layerGroup().addTo(map);
@@ -669,6 +675,7 @@
     el.innerHTML = `<h2>${esc(title)}</h2><p>${detail}</p>` +
       (local ? `<p>Pages opened straight from disk can't read files. Open the GitHub Pages link instead, or run <code>python3 -m http.server</code> in the repo folder and visit <code>http://localhost:8000</code>.</p>` : '');
     $('#tripName').textContent = 'No data';
+    tiles.addTo(map);
   }
 
   async function load() {
@@ -713,6 +720,7 @@
     tagKeys();
     renderAll();
     fitTo(locs(), false);
+    tiles.addTo(map);
   }
 
   load();
