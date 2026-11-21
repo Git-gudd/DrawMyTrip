@@ -50,4 +50,7 @@ The site is plain HTML with no build step. To publish it with GitHub Pages, go t
 To preview it on your computer, run `python3 -m http.server` in this folder and open
 <http://localhost:8000>. Opening `index.html` straight from disk won't work, because the browser blocks it from reading the data file.
 
+The dark map comes from CARTO and needs a free key from <https://carto.com/basemaps/apikey>.
+The key is set as `CARTO_KEY` at the top of `assets/app.js`.
+
 Map tiles © OpenStreetMap contributors © CARTO. Leaflet and the Barlow fonts are bundled under their own licences.

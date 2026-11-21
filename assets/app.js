@@ -4,6 +4,9 @@
 (() => {
   'use strict';
 
+  // Free CARTO basemap key (https://carto.com/basemaps/apikey). It is visible to anyone
+  // who opens the page, which is normal for map keys; restrict it to your site in CARTO.
+  const CARTO_KEY = 'cb1_5dej_1_f11e974b0c898bc06d747c16';
   const DATA_URL = 'data/locations.json';
   const DRAFT_KEY = 'drawmytrip:draft:v1';
   const UNASSIGNED_COLOR = '#FF3D8B';
@@ -125,8 +128,8 @@
   /* ---------- Map ---------- */
   const map = L.map('map', { zoomControl: false, preferCanvas: false }).setView([13.75, 100.52], 12);
   L.control.zoom({ position: 'bottomright' }).addTo(map);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 20,
+  L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`, {
+    maxZoom: 20,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   }).addTo(map);
   const routeLayer = L.layerGroup().addTo(map);
